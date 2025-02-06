@@ -2,18 +2,18 @@ import express from "express";
 
 const app = express();
 
-// const { PrismaClient } = require("@prisma/client");
-// const prisma = new PrismaClient();
+const { PrismaClient } = require("@prisma/client");
+const prisma = new PrismaClient();
 
-// app.get("/user", async (req, res) => {
-//   const val = await prisma.user.findMany({
-//     take: 10,
-//   });
+app.get("/user", async (req, res) => {
+  const val = await prisma.user.findMany({
+    take: 10,
+  });
 
-//   res.json({
-//     user: val,
-//   });
-// });
+  res.json({
+    user: val,
+  });
+});
 
 app.get("*", (req, res) => {
   res.json({
