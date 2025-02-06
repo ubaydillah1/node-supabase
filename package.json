@@ -4,7 +4,7 @@
   "main": "app.js",
   "scripts": {
     "start": "node dist/app.js",
-    "build": "tsc -p ."
+    "build": "prisma generate && tsc -p ."
   },
   "keywords": [],
   "author": "",
