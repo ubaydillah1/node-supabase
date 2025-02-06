@@ -4,7 +4,8 @@
   "main": "app.js",
   "scripts": {
     "start": "node dist/app.js",
-    "build": "prisma generate && tsc -p ."
+    "build": "tsc -p .",
+    "postinstall": "prisma generate"
   },
   "keywords": [],
   "author": "",
