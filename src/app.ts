@@ -3,18 +3,18 @@ import "dotenv/config";
 
 const app = express();
 
-import { PrismaClient } from "@prisma/client";
-const prisma = new PrismaClient();
+// import { PrismaClient } from "@prisma/client";
+// const prisma = new PrismaClient();
 
-app.get("/user", async (req, res) => {
-  const val = await prisma.user.findMany({
-    take: 10,
-  });
+// app.get("/user", async (req, res) => {
+//   const val = await prisma.user.findMany({
+//     take: 10,
+//   });
 
-  res.json({
-    user: val,
-  });
-});
+//   res.json({
+//     user: val,
+//   });
+// });
 
 app.get("*", (req, res) => {
   res.json({
