@@ -1,8 +1,9 @@
 import express from "express";
+import "dotenv/config";
 
 const app = express();
 
-const { PrismaClient } = require("@prisma/client");
+import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 app.get("/user", async (req, res) => {
@@ -18,6 +19,7 @@ app.get("/user", async (req, res) => {
 app.get("*", (req, res) => {
   res.json({
     message: "success",
+    env: process.env.DATABASE_URL,
   });
 });
 

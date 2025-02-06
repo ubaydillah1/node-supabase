@@ -13,9 +13,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
+require("dotenv/config");
 const app = (0, express_1.default)();
-const { PrismaClient } = require("@prisma/client");
-const prisma = new PrismaClient();
+const client_1 = require("@prisma/client");
+const prisma = new client_1.PrismaClient();
 app.get("/user", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const val = yield prisma.user.findMany({
         take: 10,
@@ -27,24 +28,25 @@ app.get("/user", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 app.get("*", (req, res) => {
     res.json({
         message: "success",
+        env: process.env.DATABASE_URL,
     });
 });
 const server = app.listen(3000, () => __awaiter(void 0, void 0, void 0, function* () {
     console.log("http://localhost:3000");
 }));
-process.on("SIGINT", () => __awaiter(void 0, void 0, void 0, function* () {
-    console.log("Shutting down server...");
-    yield prisma.$disconnect();
-    server.close(() => {
-        console.log("Server closed.");
-        process.exit(0);
-    });
-}));
-process.on("SIGTERM", () => __awaiter(void 0, void 0, void 0, function* () {
-    console.log("Shutting down server...");
-    yield prisma.$disconnect();
-    server.close(() => {
-        console.log("Server closed.");
-        process.exit(0);
-    });
-}));
+// process.on("SIGINT", async () => {
+//   console.log("Shutting down server...");
+//   await prisma.$disconnect();
+//   server.close(() => {
+//     console.log("Server closed.");
+//     process.exit(0);
+//   });
+// });
+// process.on("SIGTERM", async () => {
+//   console.log("Shutting down server...");
+//   await prisma.$disconnect();
+//   server.close(() => {
+//     console.log("Server closed.");
+//     process.exit(0);
+//   });
+// });
